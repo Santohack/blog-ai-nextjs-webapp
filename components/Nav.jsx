@@ -2,19 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { signOut, useSession, getProviders } from "next-auth/react";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
 const Nav = () => {
-  const isSignIn = true;
+  const {data:session} = useSession();
+
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
   useEffect(() => {
-    const Providers = async () => {
+    const setUpProviders = async () => {
       const response = await getProviders();
       setProviders(response);
     };
-    Providers();
+    setUpProviders();
   }, []);
 
   return (
@@ -31,7 +32,7 @@ const Nav = () => {
       </Link>
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {isSignIn ? (
+        {session?.user ? (
           <div className="flex gap-3 items-center">
             <Link href="/create-prompt" className="black_btn">
               Create Post
@@ -41,7 +42,7 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                src={"/assets/images/logo.svg"}
+                src={session?.user?.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -51,25 +52,26 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              ))}
+             {providers !== null && providers !== undefined &&
+      Object.values(providers).map((provider) => (
+        <button
+          type="button"
+          key={provider.name}
+          onClick={() => signIn(provider.id)}
+          className="black_btn"
+        >
+          Sign In
+        </button>
+      ))}
           </>
         )}
       </div>
       {/* Mobile Navigation  */}
       <div className="sm:hidden flex ralative">
-        {isSignIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src={"/assets/images/logo.svg"}
+              src={session?.user?.image}
               width={37}
               height={37}
               className="rounded-full"
@@ -111,6 +113,7 @@ const Nav = () => {
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
+                type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
