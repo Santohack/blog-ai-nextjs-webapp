@@ -6,14 +6,14 @@ export const connectDB = async () => {
     mongoose.set("strictQuery", true);
 
 
-    if(isConnected){
+    if (isConnected) {
         console.log("MongoDB is already connected");
         return;
     }
 
     try {
-      await  mongoose.connect(process.env.MONGODB_URI,{
-            dbName:'dewebcity',
+        await mongoose.connect(process.env.MONGODB_URI, {
+            dbName: 'dewebcity',
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
@@ -21,7 +21,7 @@ export const connectDB = async () => {
         console.log("MongoDB connected");
     } catch (error) {
         console.log(error);
-        
+
     }
 
 }

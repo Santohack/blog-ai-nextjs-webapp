@@ -5,7 +5,7 @@ import Link from "next/link";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { useEffect, useState } from "react";
 const Nav = () => {
-  const {data:session} = useSession();
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -28,7 +28,7 @@ const Nav = () => {
           height={30}
           className="object-contain"
         />
-        <p className="logo_text">Santohack</p>
+        <p className="logo_text">DWC</p>
       </Link>
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
@@ -52,17 +52,18 @@ const Nav = () => {
           </div>
         ) : (
           <>
-             {providers !== null && providers !== undefined &&
-      Object.values(providers).map((provider) => (
-        <button
-          type="button"
-          key={provider.name}
-          onClick={() => signIn(provider.id)}
-          className="black_btn"
-        >
-          Sign In
-        </button>
-      ))}
+            {providers !== null &&
+              providers !== undefined &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => signIn(provider.id)}
+                  className="black_btn"
+                >
+                  Sign In
+                </button>
+              ))}
           </>
         )}
       </div>
@@ -113,7 +114,7 @@ const Nav = () => {
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
-                type="button"
+                  type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
                   className="black_btn"

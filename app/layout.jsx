@@ -1,32 +1,31 @@
-import React from 'react'
-import '@styles/globals.css'
-import Nav from '@components/Nav'
-import Provider from '@components/Provider'
-
+import React from "react";
+import "@styles/globals.css";
+import Nav from "@components/Nav";
+import Provider from "@components/Provider";
 
 export const metadata = {
-    title: 'Blog',
-    description: ' can edit your blog here.',
-}
-const RootLayout = ({children}) => {
+  title: "Blog",
+  description: " can edit your blog here.",
+};
+const RootLayout = ({ children }) => {
   return (
-   <>
-   <html lang="en">
-    <body>
-        <Provider>
-        <div className="main">
-            <div className="gradient" />
+    <>
+      <html lang="en">
+        <body>
+          <Provider>
+            <div className="main">
+              <div className="gradient" />
             </div>
 
             <main className="app">
-                <Nav />
-                {children}
+              <Nav />
+              {children}
             </main>
-            </Provider>
-    </body>
-    </html>
-   </>
-  )
-}
+          </Provider>
+        </body>
+      </html>
+    </>
+  );
+};
 
-export default RootLayout
+export default RootLayout;
