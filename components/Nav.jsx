@@ -32,6 +32,12 @@ const Nav = () => {
       </Link>
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
+      <div className="flex gap-3 items-center mx-4">
+  <a href="/blogs" target="_blank" rel="noopener noreferrer" className="black_btn">
+    Blogs
+  </a>
+</div>
+
         {session?.user ? (
           <div className="flex gap-3 items-center">
             <Link href="/create-prompt" className="black_btn">
@@ -69,6 +75,11 @@ const Nav = () => {
       </div>
       {/* Mobile Navigation  */}
       <div className="sm:hidden flex ralative">
+      <div className="flex gap-3 items-center mx-4">
+            <Link href="/blogs" className="black_btn">
+             Blogs
+            </Link>
+            </div>
         {session?.user ? (
           <div className="flex">
             <Image
