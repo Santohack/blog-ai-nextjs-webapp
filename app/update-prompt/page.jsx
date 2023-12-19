@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import Form from "@components/Form";
 import { useRouter, useSearchParams } from "next/navigation";
 const EditPrompt = () => {
-  const { data: session } = useSession();
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState({
@@ -40,7 +39,7 @@ const EditPrompt = () => {
         }),
       });
       if (response.ok) {
-        router.push("/");
+        router.push("/blogs");
       }
     } catch (error) {
       console.log(error);

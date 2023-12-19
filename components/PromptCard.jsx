@@ -20,10 +20,18 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
+  const [showFullPrompt, setShowFullPrompt] = useState(false);
+
+  const limitedPrompt = post.prompt.split(" ").slice(0, 45).join(" ");
+  const remainingPrompt = post.prompt.split(" ").slice(50).join(" ");
+
+  const togglePrompt = () => {
+    setShowFullPrompt(!showFullPrompt);
+  };
 
   return (
     <>
-      <div className="prompt_card">
+      <div className="prompt_card ">
         <div className="flex justify-between items-start gap-5">
           <div
             className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
@@ -58,12 +66,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             />
           </div>
         </div>
-        <p className="my-4 font-satoshi text-sm text-gray-700">
-          {" "}
-          {post.prompt}
+        <p className="my-6 font-satoshi w-auto flex-1 flex-col   h-52 overflow-hidden flex text-sm text-gray-700 ">
+          {showFullPrompt ? `${post.prompt}` : limitedPrompt}......
+         
         </p>
+        <p className="font-inter text-sm blue_gradient cursor-pointer">Read more</p>
+        <hr class="border border-gray-300 my-4 w-full "/>
         <p
-          className="font-inter text-sm blue_gradient cursor-pointer"
+          className=" font-inter text-sm blue_gradient cursor-pointer"
           onClick={() => handleTagClick && handleTagClick(post.tag)}
         >
           #{post.tag}
